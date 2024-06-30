@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 export const Booking = (props) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/book-room');
+  };
   return (
     <div id="Booking">
       <div className="container">
@@ -13,25 +19,9 @@ export const Booking = (props) => {
             <div className="Booking-text">
               <h2>Book a room</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
-              <h3>Why Choose Us?</h3>
+              <button onClick={handleButtonClick}>Click here to book</button>
               <div className="list-style">
                 <div className="col-lg-6 col-sm-6 col-xs-12">
-                  <ul>
-                    {props.data
-                      ? props.data.Why.map((d, i) => (
-                          <li key={`${d}-${i}`}>{d}</li>
-                        ))
-                      : "loading"}
-                  </ul>
-                </div>
-                <div className="col-lg-6 col-sm-6 col-xs-12">
-                  <ul>
-                    {props.data
-                      ? props.data.Why2.map((d, i) => (
-                          <li key={`${d}-${i}`}> {d}</li>
-                        ))
-                      : "loading"}
-                  </ul>
                 </div>
               </div>
             </div>
