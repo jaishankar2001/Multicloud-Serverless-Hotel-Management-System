@@ -3,7 +3,7 @@
     "title": "Dal Vacation Home",
     "paragraph": "A safe and inclusive resort for everyone in dalhousie university"
   },
-  "About": {
+  "Booking": {
     "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "Why": [
       "Lorem ipsum dolor",
@@ -161,24 +161,24 @@
   },
   "Features": [
     {
-      "icon": "fa fa-comments-o",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "img": "img/Features/room.jpg",
+      "title": "Bedrooms Rentals",
+      "text": "Rent out 1-3 person rooms, subsidized for members"
     },
     {
-      "icon": "fa fa-bullhorn",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "img": "img/Features/conference hall.jpg",
+      "title": "Conference hall rentals",
+      "text": "Plan your trips and events by booking one of our fully stocked conference halls"
     },
     {
-      "icon": "fa fa-group",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "img": "img/Features/Playroom.jpg",
+      "title": "Playroom rentals",
+      "text": "Organize events or come as a group and enjoy all the facilites present in our playroom"
     },
     {
-      "icon": "fa fa-magic",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "img": "img/Features/Theaterroom.jpg",
+      "title": "Theater room rentals",
+      "text": "Wanna have a theter experience but alone, book our theater room and enjoy any movie you need"
     }
   ]
 }

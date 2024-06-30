@@ -1,8 +1,8 @@
 import React from "react";
 
-export const About = (props) => {
+export const Booking = (props) => {
   return (
-    <div id="about">
+    <div id="Booking">
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-6">
@@ -10,8 +10,8 @@ export const About = (props) => {
             <img src="img/about.jpg" className="img-responsive" alt="" />{" "}
           </div>
           <div className="col-xs-12 col-md-6">
-            <div className="about-text">
-              <h2>About Us</h2>
+            <div className="Booking-text">
+              <h2>Book a room</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
               <h3>Why Choose Us?</h3>
               <div className="list-style">
