@@ -10,6 +10,8 @@ import { Team } from "./components/Team";
 import { Contact } from "./components/contact";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
+import ChatbotIcon from './components/ChatbotIcon';
+import ChatWindow from './components/ChatWindow';
 import "./App.css";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -19,9 +21,14 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
+  const [isChatWindowOpen, setIsChatWindowOpen] = useState(false);
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
+
+  const toggleChatWindow = () => {
+    setIsChatWindowOpen(!isChatWindowOpen);
+  };
 
   return (
     <div>
@@ -34,6 +41,8 @@ const App = () => {
       <Testimonials data={landingPageData.Testimonials} />
       <Team data={landingPageData.Team} />
       <Contact data={landingPageData.Contact} />
+      <ChatbotIcon onClick={toggleChatWindow} />
+      {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}
     </div>
   );
 };
