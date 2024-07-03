@@ -12,6 +12,8 @@ import { Contact } from "./components/contact";
 import BookRoom from "./components/BookRoom"; // Add this import
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
+import ChatbotIcon from './components/ChatbotIcon';
+import ChatWindow from './components/ChatWindow';
 import "./App.css";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -21,11 +23,17 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
+  const [isChatWindowOpen, setIsChatWindowOpen] = useState(false);
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
 
+  const toggleChatWindow = () => {
+    setIsChatWindowOpen(!isChatWindowOpen);
+  };
+
   return (
+<<<<<<< HEAD
     <Router>
       <Routes>
         <Route path="/" element={
@@ -44,6 +52,21 @@ const App = () => {
         <Route path="/book-room" element={<BookRoom />} />
       </Routes>
     </Router>
+=======
+    <div>
+      <Navigation />
+      <Header data={landingPageData.Header} />
+      <Features data={landingPageData.Features} />
+      <About data={landingPageData.About} />
+      <Services data={landingPageData.Services} />
+      <Gallery data={landingPageData.Gallery} />
+      <Testimonials data={landingPageData.Testimonials} />
+      <Team data={landingPageData.Team} />
+      <Contact data={landingPageData.Contact} />
+      <ChatbotIcon onClick={toggleChatWindow} />
+      {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}
+    </div>
+>>>>>>> main
   );
 };
 
