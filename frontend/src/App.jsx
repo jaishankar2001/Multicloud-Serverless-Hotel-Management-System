@@ -33,7 +33,6 @@ const App = () => {
   };
 
   return (
-<<<<<<< HEAD
     <Router>
       <Routes>
         <Route path="/" element={
@@ -47,26 +46,13 @@ const App = () => {
             <Testimonials data={landingPageData.Testimonials} />
             <Team data={landingPageData.Team} />
             <Contact data={landingPageData.Contact} />
+            <ChatbotIcon onClick={toggleChatWindow} />
+            {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}
           </>
         } />
         <Route path="/book-room" element={<BookRoom />} />
       </Routes>
     </Router>
-=======
-    <div>
-      <Navigation />
-      <Header data={landingPageData.Header} />
-      <Features data={landingPageData.Features} />
-      <About data={landingPageData.About} />
-      <Services data={landingPageData.Services} />
-      <Gallery data={landingPageData.Gallery} />
-      <Testimonials data={landingPageData.Testimonials} />
-      <Team data={landingPageData.Team} />
-      <Contact data={landingPageData.Contact} />
-      <ChatbotIcon onClick={toggleChatWindow} />
-      {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}
-    </div>
->>>>>>> main
   );
 };
 
