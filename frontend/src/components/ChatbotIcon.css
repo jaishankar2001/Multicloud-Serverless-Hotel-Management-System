@@ -1,0 +1,40 @@
+/* src/components/ChatbotIcon.css */
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 36px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .chatbot-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    bottom: 10px;
+    display: inline-block;
+    cursor: pointer;
+    right: 10px;
+  }
+}
+
+.chatbot-icon:hover {
+  transform: scale(1.1);
+}
+
+.chatbot-icon img {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+}
