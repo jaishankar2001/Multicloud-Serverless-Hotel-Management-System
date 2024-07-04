@@ -1,0 +1,33 @@
+import json
+import boto3
+from boto3.dynamodb.conditions import Key
+
+def lambda_handler(event, context):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('UserSecurityQuestion')
+    
+    user_id = event['queryStringParameters']['userId']
+    
+    try:
+        response = table.get_item(
+            Key={
+                'userId': user_id
+            }
+        )
+        if 'Item' in response:
+            user_attributes = response['Item']
+            return {
+                'statusCode': 200,
+                'body': json.dumps(user_attributes)
+            }
+        else:
+            return {
+                'statusCode': 210,
+                'body': json.dumps({'status': 'not_found', 'error': 'User not found'})
+            }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            
+            'body': json.dumps({'error': str(e)})
+        }
