@@ -1,0 +1,75 @@
+.form-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#authVerify {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    font-size: 11px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 50px #00000020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#decryptText {
+    font-size: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+#verify {
+    background-color: #d38f6e;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 4%;
+}
+#verify:hover {
+    background-color: #b87455;
+}
+
+#authVerify p {
+    font-size: 16px;
+}
+
+#authVerify h3{
+    color: black;
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+@media (max-width: 600px) {
+    #authVerify {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #authVerify button {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #decryptText {
+        width: 100%;
+        margin-right: 10px 0;
+    }
+}
