@@ -54,7 +54,7 @@ const SecurityForm = ({userId}) => {
         <div id="logo">
           <img src="/img/companyLogo.png" alt="Company Logo"/>
         </div>
-        <div class="component">
+        <div class="Securitycomponent">
           <label htmlFor="securityQuestion">Security Question:</label>
           <input
             type="text"

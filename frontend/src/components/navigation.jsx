@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const Navigation = (props) => {
+export const Navigation = ({ userId, handleSignOut }) => {
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -61,6 +62,15 @@ export const Navigation = (props) => {
               <a href="#contact" className="page-scroll">
                 Contact
               </a>
+            </li>
+            <li>
+            {userId ? (
+              <Link to="/" onClick={handleSignOut} style={{color:'red'}} className="page-scroll">
+                Sign Out
+              </Link>
+            ) : (
+              <Link to="/signin" className="page-scroll">Sign In</Link>
+            )}
             </li>
           </ul>
         </div>
