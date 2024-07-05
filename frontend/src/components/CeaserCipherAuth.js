@@ -44,12 +44,16 @@ const CaesarCipherAuth = ({ userId }) => {
             body: JSON.stringify({ input, cipherText, key, userId })
         });
         const result = await response.json();
-        if (result.userRole === 'RegisteredUser') {
-            navigate('/'); 
-        } else if (result.userRole === 'PropertyAgents') {
-            navigate('/admin_dashboard');
+        if(result.success) {
+            if (result.userRole === 'RegisteredUser') {
+                navigate('/'); 
+            } else if (result.userRole === 'PropertyAgents') {
+                navigate('/admin_dashboard');
+            } else {
+                alert('User Role not recognized!');
+            }
         } else {
-            alert('Incorrect decryption!');
+            alert('Incorrect Decryption!');
         }
     };
 
@@ -58,6 +62,7 @@ const CaesarCipherAuth = ({ userId }) => {
             <form id="authVerify" onSubmit={handleSubmit}>
                 <h4><span style={{ color: 'red' }}>Human Verification</span></h4>
                 <h3>Decrypt the following text using the key provided</h3>
+                <h5>[Hint: If key=2 then A+2=C]</h5>
                 <p>Cipher Text:<span style={{ color: 'red' }}>{cipherText}</span></p>
                 <p>Key: {key}</p>
                 <label>
