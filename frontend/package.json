@@ -6,6 +6,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^1.7.2",
+    "aws-sdk": "^2.1654.0",
     "emailjs-com": "^2.6.4",
     "jwt-decode": "^4.0.0",
     "react": "^17.0.1",
