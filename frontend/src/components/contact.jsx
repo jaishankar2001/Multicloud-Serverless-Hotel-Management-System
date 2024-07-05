@@ -1,12 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import React from "react";
 
 const initialState = {
   name: "",
   email: "",
   message: "",
 };
+
 export const Contact = (props) => {
   const [{ name, email, message }, setState] = useState(initialState);
 
@@ -14,27 +14,28 @@ export const Contact = (props) => {
     const { name, value } = e.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
+
   const clearState = () => setState({ ...initialState });
-  
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, message);
-    
-    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
-    
+    console.log(name, email, message); // For debugging
+
     emailjs
       .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
       .then(
         (result) => {
           console.log(result.text);
-          clearState();
+          clearState(); // Clear form fields after successful submission
+          // Optionally, provide user feedback (success message, etc.)
         },
         (error) => {
           console.log(error.text);
+          // Handle errors (e.g., display error message to user)
         }
       );
   };
+
   return (
     <div>
       <div id="contact">
@@ -48,7 +49,7 @@ export const Contact = (props) => {
                   get back to you as soon as possible.
                 </p>
               </div>
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
+              <form name="contactForm" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -58,10 +59,10 @@ export const Contact = (props) => {
                         name="name"
                         className="form-control"
                         placeholder="Name"
-                        required
+                        value={name}
                         onChange={handleChange}
+                        required
                       />
-                      <p className="help-block text-danger"></p>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -72,10 +73,10 @@ export const Contact = (props) => {
                         name="email"
                         className="form-control"
                         placeholder="Email"
-                        required
+                        value={email}
                         onChange={handleChange}
+                        required
                       />
-                      <p className="help-block text-danger"></p>
                     </div>
                   </div>
                 </div>
@@ -86,12 +87,11 @@ export const Contact = (props) => {
                     className="form-control"
                     rows="4"
                     placeholder="Message"
-                    required
+                    value={message}
                     onChange={handleChange}
+                    required
                   ></textarea>
-                  <p className="help-block text-danger"></p>
                 </div>
-                <div id="success"></div>
                 <button type="submit" className="btn btn-custom btn-lg">
                   Send Message
                 </button>
