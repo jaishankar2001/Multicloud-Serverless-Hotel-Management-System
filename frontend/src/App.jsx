@@ -10,6 +10,7 @@ import { Testimonials } from "./components/testimonials";
 import { Team } from "./components/Team";
 import { Contact } from "./components/contact";
 import BookRoom from "./components/BookRoom"; // Add this import
+import RoomList from "./components/RoomList";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import ChatbotIcon from './components/ChatbotIcon';
@@ -51,6 +52,7 @@ const App = () => {
           </>
         } />
         <Route path="/book-room" element={<BookRoom />} />
+        <Route path="/show-room" element={<RoomList />} />
       </Routes>
     </Router>
   );
