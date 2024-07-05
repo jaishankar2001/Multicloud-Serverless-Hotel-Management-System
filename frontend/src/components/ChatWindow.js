@@ -1,6 +1,5 @@
-// ChatWindow.js
+// src/components/ChatWindow.js
 import React, { useState, useEffect, useRef } from 'react';
-import { sendMessageToLex } from '../lexService'; // Update path as needed
 import './ChatWindow.css';
 
 const ChatWindow = ({ onClose }) => {
@@ -8,17 +7,25 @@ const ChatWindow = ({ onClose }) => {
   const [input, setInput] = useState('');
   const chatBodyRef = useRef(null);
 
-  const handleSend = async () => {
+  const botResponses = [
+    'This is a simulated response from the bot.',
+    'How can I help you today?',
+    'Please provide more details.',
+    'I am here to assist you.',
+  ];
+
+  const handleSend = () => {
     if (input.trim()) {
       const newMessages = [...messages, { text: input, sender: 'user' }];
       setMessages(newMessages);
       setInput('');
 
-      const sessionId = 'defaultSessionId'; 
-      const lexResponse = await sendMessageToLex(input, sessionId);
-
-      const botMessage = { text: lexResponse, sender: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      // Simulate bot response
+      setTimeout(() => {
+        const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+        const botMessage = { text: randomResponse, sender: 'bot' };
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
+      }, 1000);
     }
   };
 
