@@ -18,7 +18,7 @@ export const Navigation = ({ userId, handleSignOut }) => {
             <span className="icon-bar"></span>{" "}
             <span className="icon-bar"></span>{" "}
           </button>
-          <a className="navbar-brand page-scroll" href="#page-top">
+          <a className="navbar-brand page-scroll" href="#page-top" style={{ marginLeft: '-50px' }}>
             Dal Vacation Home
           </a>{" "}
         </div>

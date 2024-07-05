@@ -5,7 +5,7 @@ export const Booking = (props) => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/book-room');
+    navigate('/show-room');
   };
   return (
     <div id="Booking">
