@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
@@ -13,13 +13,12 @@ import BookRoom from "./components/BookRoom";
 import RoomList from "./components/RoomList";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
-import ChatbotIcon from './components/ChatbotIcon';
-import ChatWindow from './components/ChatWindow';
 import "./App.css";
 import SignIn from './components/SignIn';
 import SecurityQuestionAnswer from './components/SecurityQuestionAnswer';
 import CaesarCipherAuth from './components/CeaserCipherAuth';
 import SecurityQuestionSetup from './components/SecurityQuestion';
+import ChatKommunicate from "./components/chatkummunicate";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -28,15 +27,12 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
-  const [isChatWindowOpen, setIsChatWindowOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
 
-  const toggleChatWindow = () => {
-    setIsChatWindowOpen(!isChatWindowOpen);
-  };
+  
 
   const handleSignOut = () => {
     // Clear tokens from localStorage or sessionStorage
@@ -63,8 +59,7 @@ const App = () => {
             <Testimonials data={landingPageData.Testimonials} />
             {/* <Team data={landingPageData.Team} /> */}
             <Contact data={landingPageData.Contact} />
-            <ChatbotIcon onClick={toggleChatWindow} />
-            {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}
+            <ChatKommunicate />
           </>
         } />
         <Route path="/book-room" element={<BookRoom />} />
