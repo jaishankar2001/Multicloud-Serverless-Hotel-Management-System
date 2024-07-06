@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
 import { Booking } from "./components/booking";
-import { Services } from "./components/services";
-import { Gallery } from "./components/gallery";
+// import { Services } from "./components/services";
+// import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
-import { Team } from "./components/Team";
+// import { Team } from "./components/Team";
 import { Contact } from "./components/contact";
-import BookRoom from "./components/BookRoom"; // Add this import
+import BookRoom from "./components/BookRoom";
 import RoomList from "./components/RoomList";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
@@ -58,10 +58,10 @@ const App = () => {
             <Header data={landingPageData.Header} />
             <Features data={landingPageData.Features} />
             <Booking data={landingPageData.Booking} />
-            <Services data={landingPageData.Services} />
-            <Gallery data={landingPageData.Gallery} />
+            {/* <Services data={landingPageData.Services} /> */}
+            {/* <Gallery data={landingPageData.Gallery} /> */}
             <Testimonials data={landingPageData.Testimonials} />
-            <Team data={landingPageData.Team} />
+            {/* <Team data={landingPageData.Team} /> */}
             <Contact data={landingPageData.Contact} />
             <ChatbotIcon onClick={toggleChatWindow} />
             {isChatWindowOpen && <ChatWindow onClose={toggleChatWindow} />}

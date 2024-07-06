@@ -1,7 +1,7 @@
 {
   "Header": {
     "title": "Dal Vacation Home",
-    "paragraph": "A safe and inclusive resort for everyone in dalhousie university"
+    "paragraph": "A safe and inclusive resort for everyone in Dalhousie University"
   },
   "Booking": {
     "paragraph": "Book a room with us to confirm your stay",
@@ -100,33 +100,33 @@
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "text": "\"The overall quality provided by Dal Vacation Home was excellent; I really enjoyed my stay. That room was so big, neat and with a magnificent aerial of the entire city.\"",
+      "name": "John Smith"
     },
     {
       "img": "img/testimonials/02.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "text": "\" The people who work there are very nice and supportive too. I advise anyone who is looking for a quiet place to relax to go there as soon as possible.\"",
+      "name": "Johnathan Carter"
     },
     {
       "img": "img/testimonials/03.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "text": "\"It was a seamless booking experience where the rooms were beyond my expectations. I am definitely returning as soon as possible. See you soon Dal Vacation Home!\"",
+      "name": "Uchi Tang"
     },
     {
       "img": "img/testimonials/04.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "text": "\" The amenities were excellent, not to mention the convenient location of this hotel thereby making it a cinch to tour around the famous attractions in the area. Loved it!\"",
+      "name": "Sam Currain"
     },
     {
       "img": "img/testimonials/05.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "text": "\"My experience at Dal Vacation Home was absolutely stunning. Moreover, the hotel staff was friendly and attentive so that they attended to all my needs. Overall, great feeling.\"",
+      "name": "Mike Anthony"
     },
     {
       "img": "img/testimonials/06.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "text": "\"The overall quality provided by Dal Vacation Home was excellent; I really enjoyed my stay. That room was so big, neat and with a magnificent aerial of the entire city.\"",
+      "name": "Sarah"
     }
   ],
   "Team": [
@@ -152,9 +152,9 @@
     }
   ],
   "Contact": {
-    "address": "4321 California St, San Francisco, CA 12345 ",
-    "phone": "+1 123 456 1234",
-    "email": "info@company.com",
+    "address": "4321 Waterfront St, Halifax, NS 12345 ",
+    "phone": "+1 132 456 1334",
+    "email": "info@dalvacationhome.ca",
     "facebook": "fb.com",
     "twitter": "twitter.com",
     "youtube": "youtube.com"
