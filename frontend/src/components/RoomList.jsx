@@ -44,11 +44,11 @@ const RoomList = () => {
         <div className="col-md-10 col-md-offset-1 section-title">
           <h2>Rooms Available</h2>
         </div>
-        <div className="row">
+        <div className="row justify-content-center">
           {roomsData.length > 0 ? (
             roomsData.map((room, index) => (
-              <div key={index} className="col-xs-12 col-md-4">
-                <div className="room-item" style={{ backgroundColor: "white", padding: "20px", marginBottom: "20px", borderRadius: "10px" }}>
+              <div key={index} className="col-xs-12 col-md-4 d-flex justify-content-center mb-4">
+                <div className="room-item d-flex flex-column align-items-center" style={{ backgroundColor: "white", padding: "20px", marginBottom: "20px", borderRadius: "10px", textAlign: "center"}}>
                   <button onClick={() => handleRoomClick(room.Type, room.Capacity )} style={{ width: "100%", height: "40%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textDecoration: "none", color: "inherit" }}>
                     <div className="room-image">
                       <img
@@ -60,7 +60,8 @@ const RoomList = () => {
                     </div>
                     <h3>{room.Type}</h3>
                     <p>Capacity: {room.Capacity}</p>
-                    <p>Available: {room["Available Rooms"]}</p>
+                    <p>Total Available Rooms: {room["Available Rooms"]}</p>
+                    <p>Cost per room: ${room["Cost"]}</p>
                   </button>
                 </div>
               </div>

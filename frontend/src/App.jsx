@@ -19,6 +19,7 @@ import SecurityQuestionAnswer from './components/SecurityQuestionAnswer';
 import CaesarCipherAuth from './components/CeaserCipherAuth';
 import SecurityQuestionSetup from './components/SecurityQuestion';
 import ChatKommunicate from "./components/chatkummunicate";
+import AddRoom from "./components/roomModify";
 import AdminDashboard from './components/AdminDashboard';
 import AddRoom from './components/AddRoom';
 import DeleteRoom from './components/DeleteRoom';
@@ -62,9 +63,11 @@ const App = () => {
             <Testimonials data={landingPageData.Testimonials} />
             {/* <Team data={landingPageData.Team} /> */}
             <Contact data={landingPageData.Contact} />
+            
             <ChatKommunicate />
           </>
         } />
+        <Route path="/AddRoom" element={<AddRoom />}/>
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
         <Route path="/security-question-setup" element={<SecurityQuestionSetup userId={userId} />} />
