@@ -9,7 +9,7 @@ const Sidebar = ({ handleSignOut }) => {
             <h3>Admin Menu</h3>
             <ul>
                 <li>
-                    <Link to="/admin_dashboard/add-room">Add Room</Link>
+                    <Link to="/admin_dashboard/AddRoom">Add Room</Link>
                 </li>
                 <li>
                     <Link to="#">Delete Room</Link>
