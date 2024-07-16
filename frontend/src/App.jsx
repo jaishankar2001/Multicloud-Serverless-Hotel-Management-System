@@ -21,7 +21,6 @@ import SecurityQuestionSetup from './components/SecurityQuestion';
 import ChatKommunicate from "./components/chatkummunicate";
 import AddRoom from "./components/roomModify";
 import AdminDashboard from './components/AdminDashboard';
-import AddRoom from './components/AddRoom';
 import DeleteRoom from './components/DeleteRoom';
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -67,7 +66,7 @@ const App = () => {
             <ChatKommunicate />
           </>
         } />
-        <Route path="/AddRoom" element={<AddRoom />}/>
+        {/* <Route path="/AddRoom" element={<AddRoom />}/> */}
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
         <Route path="/security-question-setup" element={<SecurityQuestionSetup userId={userId} />} />
@@ -75,7 +74,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn setUserId={setUserId} />} />
         <Route path="/solveceaser" element={<CaesarCipherAuth userId={userId} />} />
         <Route path="/admin_dashboard" element={<AdminDashboard handleSignOut={handleSignOut} />} >
-          <Route path="add-room" element={<AddRoom />} />
+          <Route path="AddRoom" element={<AddRoom />} />
           <Route path="delete-room" element={<DeleteRoom />} />
           {/* <Route path="statistics" element={<Statistics />} /> */}
         </Route>

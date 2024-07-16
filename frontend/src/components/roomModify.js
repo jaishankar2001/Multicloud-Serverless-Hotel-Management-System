@@ -96,7 +96,7 @@ const AddRoom = () => {
           <h2>Add Room Quantity</h2>
           <p>Welcome to the admin page. Please fill out the form below to add room quantities.</p>
           <img
-            src="./img/Features/bedroom.jpg"
+            src="/img/Features/bedroom.jpg"
             alt="Admin"
             style={imageStyle}
             className="admin-img"
