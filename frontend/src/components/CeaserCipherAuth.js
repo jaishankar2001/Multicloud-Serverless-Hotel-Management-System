@@ -47,7 +47,7 @@ const CaesarCipherAuth = ({ userId }) => {
         if(result.success) {
             if (result.userRole === 'RegisteredUser') {
                 navigate('/'); 
-            } else if (result.userRole === 'PropertyAgents') {
+            } else if (result.userRole === 'PropertyAgent') {
                 navigate('/admin_dashboard');
             } else {
                 alert('User Role not recognized!');

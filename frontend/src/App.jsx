@@ -19,6 +19,9 @@ import SecurityQuestionAnswer from './components/SecurityQuestionAnswer';
 import CaesarCipherAuth from './components/CeaserCipherAuth';
 import SecurityQuestionSetup from './components/SecurityQuestion';
 import ChatKommunicate from "./components/chatkummunicate";
+import AdminDashboard from './components/AdminDashboard';
+import AddRoom from './components/AddRoom';
+import DeleteRoom from './components/DeleteRoom';
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -68,6 +71,11 @@ const App = () => {
         <Route path="/security-question-answer" element={<SecurityQuestionAnswer userId={userId} />} />
         <Route path="/signin" element={<SignIn setUserId={setUserId} />} />
         <Route path="/solveceaser" element={<CaesarCipherAuth userId={userId} />} />
+        <Route path="/admin_dashboard" element={<AdminDashboard handleSignOut={handleSignOut} />} >
+          <Route path="add-room" element={<AddRoom />} />
+          <Route path="delete-room" element={<DeleteRoom />} />
+          {/* <Route path="statistics" element={<Statistics />} /> */}
+        </Route>
       </Routes>
     </Router>
   );
