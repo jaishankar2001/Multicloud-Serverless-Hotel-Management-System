@@ -1,4 +1,10 @@
 /* Chat.css */
+.chat-headers {
+    width: 100%;
+    max-width: 800px; /* Adjust max-width as needed */
+    margin: 0 auto;
+    text-align: center; /* Center align the form */
+    }
 .chat-form {
     width: 100%;
     max-width: 800px; /* Adjust max-width as needed */

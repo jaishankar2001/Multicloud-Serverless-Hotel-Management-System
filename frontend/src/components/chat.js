@@ -72,9 +72,9 @@ const Chat = () => {
   };
 
   return (
-    <div id="Chat" className="text-center">
+    <div id="Chat">
       <div className="container">
-        <div className="section-title">
+        <div className="chat-headers">
           <h2>Chat Interface</h2>
           <p>Communicate in real-time with your agent.</p>
         <p><strong>User ID:</strong> {userId}</p>
