@@ -23,6 +23,7 @@ import AddRoom from "./components/roomModify";
 import AdminDashboard from './components/AdminDashboard';
 import DeleteRoom from './components/DeleteRoom';
 import Chat from './components/chat'; 
+import RoomListAdmin from "./components/roomListAdmin";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -70,6 +71,7 @@ const App = () => {
         {/* <Route path="/AddRoom" element={<AddRoom />}/> */}
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
+        <Route path="/show-roomadmin" element={<RoomListAdmin />} />
         <Route path="/security-question-setup" element={<SecurityQuestionSetup userId={userId} />} />
         <Route path="/security-question-answer" element={<SecurityQuestionAnswer userId={userId} />} />
         <Route path="/signin" element={<SignIn setUserId={setUserId} />} />
