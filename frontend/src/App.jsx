@@ -22,6 +22,7 @@ import ChatKommunicate from "./components/chatkummunicate";
 import AddRoom from "./components/roomModify";
 import AdminDashboard from './components/AdminDashboard';
 import DeleteRoom from './components/DeleteRoom';
+import Chat from './components/chat'; 
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -78,6 +79,8 @@ const App = () => {
           <Route path="delete-room" element={<DeleteRoom />} />
           {/* <Route path="statistics" element={<Statistics />} /> */}
         </Route>
+        {/* Route for Chat component with dynamic conversation ID */}
+        <Route path="/chat/:conversationId/:usertype" element={<Chat />} />
       </Routes>
     </Router>
   );
