@@ -46,7 +46,7 @@ const SignIn = ({setUserId}) => {
 
             // Decode the ID token to get user information
             const decodedToken = jwtDecode(id_token);
-            const userId = decodedToken.sub; // Assuming 'sub' is the user ID
+            const userId = decodedToken.sub;
   
             // Set user ID in state
             setUserId(userId);
@@ -67,7 +67,7 @@ const SignIn = ({setUserId}) => {
                   navigate('/security-question-answer');
               }
             } else if (userAttributesResponse.status === 210) {
-                // User not found, redirect accordingly
+                // User not found, then redirect
                 navigate('/security-question-setup');
             } else {
                 // Handle other errors
