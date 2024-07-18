@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import CryptoJS from 'crypto-js';
 
 
 const fetchUserAttributes = async (userId) => {
@@ -37,19 +38,21 @@ const SignIn = ({setUserId}) => {
             });
   
             const { id_token, access_token, refresh_token } = response.data;
-            // Store tokens in localStorage or sessionStorage
-            localStorage.setItem('id_token', id_token);
-            localStorage.setItem('access_token', access_token);
-            localStorage.setItem('refresh_token', refresh_token);
-  
+            // Store tokens in localStorage
+            const secretKey = process.env.REACT_APP_SECRET_KEY;
+            localStorage.setItem('encrypted_id_token', CryptoJS.AES.encrypt(id_token, secretKey).toString());
+            localStorage.setItem('encrypted_access_token', CryptoJS.AES.encrypt(access_token, secretKey).toString());
+            localStorage.setItem('encrypted_refresh_token', CryptoJS.AES.encrypt(refresh_token, secretKey).toString());
+
             // Decode the ID token to get user information
             const decodedToken = jwtDecode(id_token);
-            const userId = decodedToken.sub; // Assuming 'sub' is the user ID
+            const userId = decodedToken.sub;
   
-            // Set user ID in state or pass it as prop to components
+            // Set user ID in state
             setUserId(userId);
-  
-              // Fetch user details from DynamoDB to check if security question is set
+            localStorage.setItem('user_id', userId);
+
+            // Fetch user details from DynamoDB to check if security question is set
             const userAttributesResponse = await fetchUserAttributes(userId);
             console.log(userAttributesResponse);
   
@@ -64,7 +67,7 @@ const SignIn = ({setUserId}) => {
                   navigate('/security-question-answer');
               }
             } else if (userAttributesResponse.status === 210) {
-                // User not found, redirect or handle accordingly
+                // User not found, then redirect
                 navigate('/security-question-setup');
             } else {
                 // Handle other errors
@@ -90,7 +93,6 @@ const SignIn = ({setUserId}) => {
     };
     return <div>Loading...</div>;
 
-    // const isAuthenticated = localStorage.getItem('id_token') !== null;
   };
   export default SignIn;
   
