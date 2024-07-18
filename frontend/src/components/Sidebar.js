@@ -9,10 +9,13 @@ const Sidebar = ({ handleSignOut }) => {
             <h3>Admin Menu</h3>
             <ul>
                 <li>
-                    <Link to="/admin_dashboard/AddRoom">Add Room</Link>
+                    <Link to="/admin_dashboard/AddNewRoom">Add Room</Link>
                 </li>
                 <li>
-                    <Link to="#">Delete Room</Link>
+                    <Link to="/admin_dashboard/AddRoom">Update Room</Link>
+                </li>
+                <li>
+                    <Link to="/admin_dashboard/DeleteRoom">Delete Room</Link>
                 </li>
                 <li>
                     <Link to="#">Statistics</Link>
