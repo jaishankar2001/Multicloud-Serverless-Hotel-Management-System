@@ -35,7 +35,7 @@ const RoomListAdmin = () => {
 
   const handleRoomClick = (room_type, room_cap) => {
     console.log(`Clicked room with type ${room_type} and capacity ${room_cap}`);
-    navigate("/AddRoom", { state: { roomType: room_type, roomCapacity: room_cap } });
+    navigate("/RoomModify", { state: { roomType: room_type, roomCapacity: room_cap } });
   };
 
   return (

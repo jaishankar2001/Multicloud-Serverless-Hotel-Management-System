@@ -68,7 +68,7 @@ const App = () => {
             <ChatKommunicate />
           </>
         } />
-        {/* <Route path="/AddRoom" element={<AddRoom />}/> */}
+        <Route path="/AddRoom" element={<AddRoom />}/>
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
         <Route path="/show-roomadmin" element={<RoomListAdmin />} />
