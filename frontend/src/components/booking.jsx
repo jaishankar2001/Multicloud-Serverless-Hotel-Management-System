@@ -1,11 +1,28 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import validateToken from './validateToken';
 
 export const Booking = (props) => {
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate('/show-room');
+  const handleButtonClick = async () => {
+    // navigate('/show-room');
+    try {
+      // Validate the token
+      const isValid = await validateToken();
+
+      if (isValid) {
+        // Proceed to the next page or booking logic
+        navigate('/show-room');
+      } else {
+        // Token validation failed, handle accordingly (e.g., show error message)
+        alert('Please sign in first to book a room.');
+      }
+    } catch (error) {
+      console.error('Error validating token:', error);
+      // Handle error (e.g., show error message)
+      alert('Error validating token. Please try again later.');
+    }
   };
   return (
     <div id="Booking">

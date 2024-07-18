@@ -40,10 +40,10 @@ const App = () => {
   
 
   const handleSignOut = () => {
-    // Clear tokens from localStorage or sessionStorage
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('encrypted_id_token');
+    localStorage.removeItem('encrypted_access_token');
+    localStorage.removeItem('encrypted_refresh_token');
+    localStorage.removeItem('user_id');
   
     setUserId(null);
     const signOutUrl = `https://register-customers.auth.us-east-1.amazoncognito.com/logout?client_id=44netf2dipspddsebq3vmq8pmn&logout_uri=http%3A%2F%2Flocalhost%3A3000`;
