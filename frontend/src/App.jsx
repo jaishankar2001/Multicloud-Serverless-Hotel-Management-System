@@ -24,6 +24,7 @@ import AdminDashboard from './components/AdminDashboard';
 import DeleteRoom from './components/DeleteRoom';
 import Chat from './components/chat'; 
 import RoomListAdmin from "./components/roomListAdmin";
+import AddNewRoom from "./components/AddNewRoom";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -78,7 +79,9 @@ const App = () => {
         <Route path="/solveceaser" element={<CaesarCipherAuth userId={userId} />} />
         <Route path="/admin_dashboard" element={<AdminDashboard handleSignOut={handleSignOut} />} >
           <Route path="AddRoom" element={<AddRoom />} />
-          <Route path="delete-room" element={<DeleteRoom />} />
+          <Route path="DeleteRoom" element={<DeleteRoom />} />
+          <Route path="AddNewRoom" element={<AddNewRoom />} />
+          
           {/* <Route path="statistics" element={<Statistics />} /> */}
         </Route>
         {/* Route for Chat component with dynamic conversation ID */}
