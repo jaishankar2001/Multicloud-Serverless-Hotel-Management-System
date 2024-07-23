@@ -1,129 +1,101 @@
-import requests
-
-LAMBDA_URL = "https://agepdyzr72sqj2tpjfimf6xhui0huwze.lambda-url.us-east-1.on.aws/"
-
-def get_booking_details(booking_id, name):
-    """
-    Calls the AWS Lambda function to get booking details based on bookingID and name.
-    """
-    # Payload to send to the Lambda function
-    payload = {
-        "bookingID": booking_id,
-        "name": name
-    }
-
-    try:
-        # Make the POST request to the Lambda function
-        response = requests.post(LAMBDA_URL, json=payload)
-
-        # Check if the request was successful
-        if response.status_code == 200:
-            # Parse the JSON response
-            data = response.json()
-            return data
-        else:
-            # Handle errors
-            print(f"Error: Received status code {response.status_code}")
-            print(response.text)
-            return None
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
+import json
+import boto3
 
 def lambda_handler(event, context):
     """
-    AWS Lambda function to handle Lex events and call another Lambda function.
+    AWS Lambda function to handle Lex bot events, retrieve booking details from DynamoDB,
+    and respond with appropriate booking information or error messages.
     """
-    # Extract slot values from the Lex event
-    print(event)
-    if(event['sessionState']['intent']['name']=='TalkToAgent'):
-        LAMBDA_URL = "https://jqj55ayxhs2ynukvhh2jt4sgem0pmuos.lambda-url.us-east-1.on.aws/"
-        
-        slots = event['sessionState']['intent']['slots']
-        booking_id = slots['BookingReferenceNumber']['value']['interpretedValue']
-        payload = {
-        "bookingID": booking_id}
-        
-        response = requests.post(LAMBDA_URL, json=payload)
-        
-        response = response.json()
-        
-        print(response)
-        url = response['messages'][0]['content']
-        
-        
-        url_ext = {
-            "sessionState": {
-                "dialogAction": {
-                    "type": "Close"
-                },
-                "intent": {
-                    "name": event['sessionState']['intent']['name'],
-                    "state": "Fulfilled"
-                }
-            },
-            "messages": [
-                {
-                    "contentType": "PlainText",
-                    "content": f"Please use the following URL to talk with an agent: {url}"
-                }
-            ]
-        }
-        
-        return url_ext
-            
+    
+    # Extract slot values from the Lex event and convert to lowercase
     slots = event['sessionState']['intent']['slots']
-    name = slots['username']['value']['interpretedValue']
-    booking_reference = slots['bookingID']['value']['interpretedValue']
+    userid = slots['username']['value']['interpretedValue'].lower()
+    booking_reference = slots['bookingID']['value']['interpretedValue'].lower()
     
-    # Call the target Lambda function
-    booking_details = get_booking_details(booking_reference, name)
+    # Initialize DynamoDB client
+    dynamodb = boto3.client('dynamodb')
     
-    
-    if booking_details:
-        # Construct the response for Lex
-        message_content = ""
+    try:
+        # Scan items from DynamoDB table based on user ID (case insensitive)
+        response = dynamodb.scan(
+            TableName='BookingDetails',
+            FilterExpression='contains(#userid, :userid)',
+            ExpressionAttributeNames={'#userid': 'userid'},
+            ExpressionAttributeValues={':userid': {'S': userid}}
+        )
         
-        if 'messages' in booking_details and booking_details['messages']:
-            message_content = booking_details['messages'][0]['content']
+        # Check if any items exist in the response
+        if 'Items' in response and response['Items']:
+            # Iterate over items to find a matching booking reference (case insensitive)
+            for item in response['Items']:
+                if item['userid']['S'].lower() == userid and item['bookingID']['S'].lower() == booking_reference:
+                    name = item['name']['S']
+                    room_number = item['roomNumber']['N']
+                    stay_duration = item['stayDuration']['S']
+                    message = (f"Booking Details:\n"
+                               f"Name: {name}\n"
+                               f"Room Number: {room_number}\n"
+                               f"Stay Duration: {stay_duration}")
+                    break
+            else:
+                message = "No booking details found for the given reference number."
         else:
-            message_content = "No booking details found."
-
-        response = {
-            'sessionState': {
-                'dialogAction': {
-                    'type': 'Close'
-                },
-                'intent': {
-                    'name': 'bookRoom',
-                    'state': 'Fulfilled'
-                }
+            message = "No booking details found for the given user ID."
+    
+    except Exception as e:
+        message = f"An error occurred: {str(e)}"
+    
+    # Construct the response for Lex
+    response = {
+        'sessionState': {
+            'dialogAction': {
+                'type': 'Close'
             },
-            'messages': [
-                {
-                    'contentType': 'PlainText',
-                    'content': message_content
-                }
-            ]
-        }
-    else:
-        # Handle the case where booking details are not retrieved
-        response = {
-            'sessionState': {
-                'dialogAction': {
-                    'type': 'Close'
-                },
-                'intent': {
-                    'name': 'bookRoom',
-                    'state': 'Fulfilled'
-                }
-            },
-            'messages': [
-                {
-                    'contentType': 'PlainText',
-                    'content': "Unable to retrieve booking details."
-                }
-            ]
-        }
-
+            'intent': {
+                'name': 'bookRoom',
+                'state': 'Fulfilled'
+            }
+        },
+        'messages': [
+            {
+                'contentType': 'PlainText',
+                'content': message
+            }
+        ]
+    }
     return response
+
+# # Test cases
+# def test_lambda_handler():
+#     """
+#     Test cases to validate the lambda_handler function.
+#     """
+#     # Test case 1: Valid user ID and booking reference
+#     event = {
+#         'sessionState': {
+#             'intent': {
+#                 'slots': {
+#                     'username': {'value': {'interpretedValue': 'user123'}},
+#                     'bookingID': {'value': {'interpretedValue': 'ref123'}}
+#                 }
+#             }
+#         }
+#     }
+#     context = {}
+#     response = lambda_handler(event, context)
+#     assert 'Booking Details' in response['messages'][0]['content'], "Test case 1 failed"
+    
+#     # Test case 2: Valid user ID but invalid booking reference
+#     event['sessionState']['intent']['slots']['bookingID']['value']['interpretedValue'] = 'invalid_ref'
+#     response = lambda_handler(event, context)
+#     assert 'No booking details found for the given reference number' in response['messages'][0]['content'], "Test case 2 failed"
+    
+#     # Test case 3: Invalid user ID
+#     event['sessionState']['intent']['slots']['username']['value']['interpretedValue'] = 'invalid_user'
+#     response = lambda_handler(event, context)
+#     assert 'No booking details found for the given user ID' in response['messages'][0]['content'], "Test case 3 failed"
+    
+#     # Test case 4: DynamoDB client exception
+#     event['sessionState']['intent']['slots']['username']['value']['interpretedValue'] = 'exception_user'
+#     response = lambda_handler(event, context)
+#

@@ -24,8 +24,8 @@ const validateToken = async () => {
         }
         const secretKey = process.env.REACT_APP_SECRET_KEY;
         const token = (CryptoJS.AES.decrypt(encrypted_token, secretKey)).toString(CryptoJS.enc.Utf8);
-        console.log("Encrypted token", encrypted_token);
-        console.log("Decoded token", token);
+        // console.log("Encrypted token", encrypted_token);
+        // console.log("Decoded token", token);
         
       if (!token) {
         throw new Error('Token not found in localStorage');

@@ -18,7 +18,7 @@ const Sidebar = ({ handleSignOut }) => {
                     <Link to="/admin_dashboard/DeleteRoom">Delete Room</Link>
                 </li>
                 <li>
-                    <Link to="#">Statistics</Link>
+                    <Link to="/admin_dashboard/Statistics">Statistics</Link>
                 </li>
                 <li>
                     <button onClick={handleSignOut} className="sign-out-button">

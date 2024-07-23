@@ -21,9 +21,11 @@ const AddRoom = () => {
         const rooms = response.data;
         setAllRooms(rooms);
 
+        // Get unique room types
         const uniqueRoomTypes = [...new Set(rooms.map(room => room.Type))];
         setRoomTypes(uniqueRoomTypes);
 
+        // Set initial form values
         if (uniqueRoomTypes.length > 0) {
           setFormData(prevData => ({
             ...prevData,

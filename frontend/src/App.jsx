@@ -25,6 +25,8 @@ import DeleteRoom from './components/DeleteRoom';
 import Chat from './components/chat'; 
 import RoomListAdmin from "./components/roomListAdmin";
 import AddNewRoom from "./components/AddNewRoom";
+import DashboardStatisticts from "./components/dashboard_statistics";
+import FeedbackList from "./pages/FeedbackList";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -67,7 +69,7 @@ const App = () => {
             <ChatKommunicate />
           </>
         } />
-        {/* <Route path="/AddRoom" element={<AddRoom />}/> */}
+        <Route path="/AddRoom" element={<AddRoom />}/>
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
         <Route path="/show-roomadmin" element={<RoomListAdmin />} />
@@ -79,11 +81,11 @@ const App = () => {
           <Route path="AddRoom" element={<AddRoom />} />
           <Route path="DeleteRoom" element={<DeleteRoom />} />
           <Route path="AddNewRoom" element={<AddNewRoom />} />
-          
-          {/* <Route path="statistics" element={<Statistics />} /> */}
+          <Route path="Statistics" element={<DashboardStatisticts />} />
         </Route>
         {/* Route for Chat component with dynamic conversation ID */}
         <Route path="/chat/:conversationId/:usertype" element={<Chat />} />
+        <Route path="/feedback" element={<FeedbackList userId={userId} handleSignOut={handleSignOut} />} />
       </Routes>
     </Router>
   );
