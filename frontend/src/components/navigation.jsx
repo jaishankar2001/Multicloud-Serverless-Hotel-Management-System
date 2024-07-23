@@ -59,6 +59,11 @@ export const Navigation = ({ userId, handleSignOut }) => {
               </a>
             </li> */}
             <li>
+              <Link to="/feedback" className="page-scroll">
+                Feedback
+              </Link>
+            </li>
+            <li>
               <a href="#contact" className="page-scroll">
                 Contact
               </a>
