@@ -6,7 +6,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 dynamodb = boto3.resource('dynamodb')
-table_name = 'Bookings'
+table_name = 'rooms'
 table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):

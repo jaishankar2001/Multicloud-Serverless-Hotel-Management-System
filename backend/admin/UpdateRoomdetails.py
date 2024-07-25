@@ -6,15 +6,17 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Bookings')
+table = dynamodb.Table('rooms')
 
 def lambda_handler(event, context):
     logger.info('Received event: %s', json.dumps(event))
     
     try:
+        # Parse the event body
         body = json.loads(event['body'])
         room_data = body.get('room_data', {})
         
+        # Validate required fields
         required_fields = ['Type', 'Capacity', 'Features', 'Available Rooms', 'Cost']
         for field in required_fields:
             if field not in room_data:
@@ -25,6 +27,7 @@ def lambda_handler(event, context):
                     'body': json.dumps(error_message)
                 }
         
+        # Update the item in DynamoDB
         response = table.update_item(
             Key={
                 'Type': room_data['Type'],
