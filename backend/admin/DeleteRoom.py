@@ -2,11 +2,12 @@ import boto3
 import json
 import logging
 
+# Set up logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 dynamodb = boto3.resource('dynamodb')
-table_name = 'Bookings' 
+table_name = 'rooms'
 table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
@@ -19,12 +20,14 @@ def lambda_handler(event, context):
         
         logger.info('Deleting item with Type: %s, Capacity: %s', room_type, capacity)
 
+        # Delete the item from DynamoDB
         response = table.delete_item(
             Key={
                 'Type': room_type,
                 'Capacity': capacity
             }
         )
+        
         logger.info('Delete item response: %s', response)
 
         return {
