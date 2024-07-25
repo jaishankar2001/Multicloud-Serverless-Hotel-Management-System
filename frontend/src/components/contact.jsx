@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import emailjs from "emailjs-com";
+import axios from "axios";
+
+const user = localStorage.getItem('user_id');
 
 const initialState = {
-  name: "",
-  email: "",
-  message: "",
+  userID: user,
+  booking_ID: "",
+  message: ""
 };
 
+
 export const Contact = (props) => {
-  const [{ name, email, message }, setState] = useState(initialState);
+  const [{ userID, booking_ID, message }, setState] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,23 +20,33 @@ export const Contact = (props) => {
 
   const clearState = () => setState({ ...initialState });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, message); // For debugging
+    console.log(userID, booking_ID, message); // For debugging
 
-    emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
-      .then(
-        (result) => {
-          console.log(result.text);
-          clearState(); // Clear form fields after successful submission
-          // Optionally, provide user feedback (success message, etc.)
-        },
-        (error) => {
-          console.log(error.text);
-          // Handle errors (e.g., display error message to user)
+    const payload = {
+      userid: userID,
+      booking_id: booking_ID,
+      content: { sender: "user", message: message }
+    };
+
+    try {
+      const response = await axios.post("https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/convo-req", payload, {
+        headers: {
+          "Content-Type": "application/json",
         }
-      );
+      });
+      if(response.data.body === '{"message": "No agents available."}')
+      {
+        alert("no agents are currently available please try again later.")
+      }
+      console.log(response.data);
+      clearState(); // Clear form fields after successful submission
+      // Optionally, provide user feedback (success message, etc.)
+    } catch (error) {
+      console.log(error);
+      // Handle errors (e.g., display error message to user)
+    }
   };
 
   return (
@@ -45,7 +58,7 @@ export const Contact = (props) => {
               <div className="section-title">
                 <h2>Get In Touch</h2>
                 <p>
-                  Please fill out the form below to send us an email and we will
+                  Please fill out the form below to send us a query and we will
                   get back to you as soon as possible.
                 </p>
               </div>
@@ -55,11 +68,11 @@ export const Contact = (props) => {
                     <div className="form-group">
                       <input
                         type="text"
-                        id="name"
-                        name="name"
+                        id="userID"
+                        name="userID"
                         className="form-control"
-                        placeholder="Name"
-                        value={name}
+                        placeholder="User ID"
+                        value={userID}
                         onChange={handleChange}
                         required
                       />
@@ -68,12 +81,12 @@ export const Contact = (props) => {
                   <div className="col-md-6">
                     <div className="form-group">
                       <input
-                        type="email"
-                        id="email"
-                        name="email"
+                        type="text"
+                        id="booking_ID"
+                        name="booking_ID"
                         className="form-control"
-                        placeholder="Email"
-                        value={email}
+                        placeholder="Booking ID"
+                        value={booking_ID}
                         onChange={handleChange}
                         required
                       />

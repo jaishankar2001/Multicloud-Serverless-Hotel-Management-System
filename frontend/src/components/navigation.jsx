@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export const Navigation = ({ userId, handleSignOut }) => {
+// const userId = localStorage.getItem('user_id')
+// console.log(userId)
+export const Navigation = ({ handleSignOut }) => {
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('user_id');
+    setUserId(storedUserId);
+  }, []);
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -83,3 +90,4 @@ export const Navigation = ({ userId, handleSignOut }) => {
     </nav>
   );
 };
+export default Navigation;

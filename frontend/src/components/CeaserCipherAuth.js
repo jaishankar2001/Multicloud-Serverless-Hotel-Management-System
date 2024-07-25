@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/CeaserCipherAuth.css';
+import axios from 'axios';
 
 const CaesarCipherAuth = ({ userId }) => {
     const [input, setInput] = useState('');
@@ -45,6 +46,12 @@ const CaesarCipherAuth = ({ userId }) => {
         });
         const result = await response.json();
         if(result.success) {
+            // const timestamp_response = await axios.post('https://us-central1-serverless-activity2.cloudfunctions.net/userLogin', {
+            //     userId
+            // });
+            const timestamp_response = await axios.post('https://lhtv6qq4lswfsjuykromqdwsme0xatrx.lambda-url.us-east-1.on.aws/', {
+                userId
+            });
             if (result.userRole === 'RegisteredUser') {
                 navigate('/'); 
             } else if (result.userRole === 'PropertyAgent') {

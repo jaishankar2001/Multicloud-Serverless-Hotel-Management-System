@@ -1,6 +1,6 @@
 // src/components/Chat.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { db, updateDocument } from './firebase'; // Import db and updateDocument from firebase.js
 import '../css/Chat.css';
 
@@ -12,6 +12,7 @@ const Chat = () => {
   const [agentId, setAgentId] = useState('');
   const {usertype} = useParams();
   const [responseMessage, setResponseMessage] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchChatData = async () => {
@@ -70,6 +71,31 @@ const Chat = () => {
     console.log(msgSender === 'user')
     return msgSender === 'user';
   };
+  const endConversation = async () => {
+    try {
+      // Remove agent_id from Firestore document
+      await updateDocument('convo', conversationId, { agent_id: '' });
+
+      // Call an API with the agentID as the body
+      const response = await fetch('https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/end-convo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ agentID: agentId, type: 'available' }),
+      });
+
+      if (response.ok) {
+        setResponseMessage('Conversation ended successfully.');
+      } else {
+        setResponseMessage('Failed to end conversation.');
+      }
+      navigate('/admin_dashboard/Convo-list');
+    } catch (error) {
+      console.error('Error ending conversation:', error);
+      setResponseMessage('Error ending conversation.');
+    }
+  };
 
   return (
     <div id="Chat">
@@ -77,8 +103,8 @@ const Chat = () => {
         <div className="chat-headers">
           <h2>Chat Interface</h2>
           <p>Communicate in real-time with your agent.</p>
-        <p><strong>User ID:</strong> {userId}</p>
-        <p><strong>Agent ID:</strong> {agentId}</p>
+          <p><strong>User ID:</strong> {userId}</p>
+          <p><strong></strong> {agentId ? `Agent ID: ${agentId}` : 'The conversation has already been closed'}</p>
         </div>
         <div className="chat-window">
           {messages.map((msg, index) => (
@@ -103,6 +129,9 @@ const Chat = () => {
           <button type="submit" className="chat-form button">
             Send
           </button>
+          <button type="button" onClick={endConversation} className="chat-form end-conversation-button">
+              End Conversation
+            </button>
         </form>
         {responseMessage && (
           <div className="response-message">
@@ -113,6 +142,7 @@ const Chat = () => {
     </div>
   );
 };
+
 
 
 

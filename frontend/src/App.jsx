@@ -27,6 +27,8 @@ import RoomListAdmin from "./components/roomListAdmin";
 import AddNewRoom from "./components/AddNewRoom";
 import DashboardStatisticts from "./components/dashboard_statistics";
 import FeedbackList from "./pages/FeedbackList";
+import ConvoList from "./components/ConvoList";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -69,19 +71,20 @@ const App = () => {
             <ChatKommunicate />
           </>
         } />
-        <Route path="/AddRoom" element={<AddRoom />}/>
+        <Route path="/AddRoom" element={<ProtectedRoute><AddRoom /></ProtectedRoute>}/>
         <Route path="/book-room" element={<BookRoom />} />
         <Route path="/show-room" element={<RoomList />} />
-        <Route path="/show-roomadmin" element={<RoomListAdmin />} />
-        <Route path="/security-question-setup" element={<SecurityQuestionSetup userId={userId} />} />
-        <Route path="/security-question-answer" element={<SecurityQuestionAnswer userId={userId} />} />
+        <Route path="/show-roomadmin" element={<ProtectedRoute><RoomListAdmin /></ProtectedRoute>} />
+        <Route path="/security-question-setup" element={<ProtectedRoute><SecurityQuestionSetup userId={userId} /></ProtectedRoute>} />
+        <Route path="/security-question-answer" element={<ProtectedRoute><SecurityQuestionAnswer userId={userId} /></ProtectedRoute>} />
         <Route path="/signin" element={<SignIn setUserId={setUserId} />} />
-        <Route path="/solveceaser" element={<CaesarCipherAuth userId={userId} />} />
-        <Route path="/admin_dashboard" element={<AdminDashboard handleSignOut={handleSignOut} />} >
-          <Route path="AddRoom" element={<AddRoom />} />
-          <Route path="DeleteRoom" element={<DeleteRoom />} />
-          <Route path="AddNewRoom" element={<AddNewRoom />} />
-          <Route path="Statistics" element={<DashboardStatisticts />} />
+        <Route path="/solveceaser" element={<ProtectedRoute><CaesarCipherAuth userId={userId} /></ProtectedRoute>} />
+        <Route path="/admin_dashboard" element={<ProtectedRoute><AdminDashboard handleSignOut={handleSignOut} /></ProtectedRoute>} >
+        <Route path="AddRoom" element={<ProtectedRoute><AddRoom /></ProtectedRoute>} />
+          <Route path="DeleteRoom" element={<ProtectedRoute><DeleteRoom /></ProtectedRoute>} />
+          <Route path="AddNewRoom" element={<ProtectedRoute><AddNewRoom /></ProtectedRoute>} />
+          <Route path="Statistics" element={<ProtectedRoute><DashboardStatisticts /></ProtectedRoute>} />
+          <Route path = "Convo-list" element = {<ProtectedRoute><ConvoList/></ProtectedRoute>}/>
         </Route>
         {/* Route for Chat component with dynamic conversation ID */}
         <Route path="/chat/:conversationId/:usertype" element={<Chat />} />
