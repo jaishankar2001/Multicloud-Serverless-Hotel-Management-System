@@ -104,7 +104,7 @@ const Chat = () => {
           <h2>Chat Interface</h2>
           <p>Communicate in real-time with your agent.</p>
           <p><strong>User ID:</strong> {userId}</p>
-          <p><strong>Agent ID:</strong> {agentId}</p>
+          <p><strong></strong> {agentId ? `Agent ID: ${agentId}` : 'The conversation has already been closed'}</p>
         </div>
         <div className="chat-window">
           {messages.map((msg, index) => (
