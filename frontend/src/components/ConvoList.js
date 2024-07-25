@@ -25,7 +25,7 @@ const ConvoList = () => {
   }, [agentID]);
   const makeAvailable = async () => {
     try {
-      const response = await fetch('https://w5bgh5jbke.execute-api.us-east-1.amazonaws.com/trail/end-convo', {
+      const response = await fetch('https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/end-convo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const ConvoList = () => {
 
   const makeUnavailable = async () => {
     try {
-      const response = await fetch('https://w5bgh5jbke.execute-api.us-east-1.amazonaws.com/trail/end-convo', {
+      const response = await fetch('https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/end-convo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

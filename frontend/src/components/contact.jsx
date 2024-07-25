@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const user = localStorage.getItem('user_id');
+
 const initialState = {
-  userID: "",
+  userID: user,
   booking_ID: "",
   message: ""
 };
+
 
 export const Contact = (props) => {
   const [{ userID, booking_ID, message }, setState] = useState(initialState);
@@ -28,12 +31,15 @@ export const Contact = (props) => {
     };
 
     try {
-      const response = await axios.post("https://w5bgh5jbke.execute-api.us-east-1.amazonaws.com/trail/convoreq", payload, {
+      const response = await axios.post("https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/convo-req", payload, {
         headers: {
           "Content-Type": "application/json",
         }
       });
-
+      if(response.data.body === '{"message": "No agents available."}')
+      {
+        alert("no agents are currently available please try again later.")
+      }
       console.log(response.data);
       clearState(); // Clear form fields after successful submission
       // Optionally, provide user feedback (success message, etc.)

@@ -7,13 +7,7 @@ export const Booking = (props) => {
 
   const handleButtonClick = async () => {
     try {
-      const isValid = await validateToken();
-
-      if (isValid) {
         navigate('/show-room');
-      } else {
-        alert('Please sign in first to book a room.');
-      }
     } catch (error) {
       console.error('Error validating token:', error);
       alert('Error validating token. Please try again later.');
