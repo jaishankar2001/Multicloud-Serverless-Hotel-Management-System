@@ -5,6 +5,7 @@ import validateToken from '../components/validateToken';
 import GetAllFeedbacks from '../components/GetFeedbacks/GetAllFeedbacks';
 import GiveFeedback from '../components/GiveFeedback/GiveFeedback';
 import GetOwnFeedbacks from '../components/GetFeedbacks/GetOwnFeedbacks';
+import Navigation from '../components/navigation';
 
 import './FeedbackList.css';
 
@@ -37,27 +38,30 @@ const FeedbackList = ({ userId, handleSignOut }) => {
   }, [userId]);
 
   return (
-    <div className="feedback-list-container">
-      <header className="feedback-list-header">
-      <Link to="/" className="nav-link">Home</Link>
-        {isValid && (
-          <button onClick={handleSignOut} className="sign-out-button">Sign Out</button>
-        )}
-      </header>
-      <GetAllFeedbacks />
-      <div className="feedback-list-content">
-        {isValid === null ? (
-          <h1>Checking validity...</h1>
-        ) : isValid ? (
-          <div className="feedback-container">
-            <GiveFeedback userId={userId} />
-            <GetOwnFeedbacks userId={userId} />
-          </div>
-        ) : (
-          <h1>Log in to give feedback</h1>
-        )}
+    <>
+      <Navigation />
+      <div className="feedback-list-container" style={{ paddingTop: '8%' }}>
+        <header className="feedback-list-header">
+        <Link to="/" className="nav-link">Home</Link>
+          {isValid && (
+            <button onClick={handleSignOut} className="sign-out-button">Sign Out</button>
+          )}
+        </header>
+        <GetAllFeedbacks />
+        <div className="feedback-list-content">
+          {isValid === null ? (
+            <h1>Checking validity...</h1>
+          ) : isValid ? (
+            <div className="feedback-container">
+              <GiveFeedback userId={userId} />
+              <GetOwnFeedbacks userId={userId} />
+            </div>
+          ) : (
+            <h1>Log in to give feedback</h1>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

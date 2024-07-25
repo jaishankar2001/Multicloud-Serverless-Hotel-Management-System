@@ -77,19 +77,19 @@ const Chat = () => {
       await updateDocument('convo', conversationId, { agent_id: '' });
 
       // Call an API with the agentID as the body
-      /*const response = await fetch('https://your-api-endpoint.com/end-conversation', {
+      const response = await fetch('https://foiiqhsc96.execute-api.us-east-1.amazonaws.com/development/end-convo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ agentID: agentId }),
+        body: JSON.stringify({ agentID: agentId, type: 'available' }),
       });
 
       if (response.ok) {
         setResponseMessage('Conversation ended successfully.');
       } else {
         setResponseMessage('Failed to end conversation.');
-      }*/
+      }
       navigate('/admin_dashboard/Convo-list');
     } catch (error) {
       console.error('Error ending conversation:', error);
