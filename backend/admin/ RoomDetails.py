@@ -3,7 +3,7 @@ import boto3
 from decimal import Decimal
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Bookings')
+table = dynamodb.Table('rooms')
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
