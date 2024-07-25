@@ -14,7 +14,7 @@ const DeleteRoom = () => {
   useEffect(() => {
     const fetchRoomTypesAndCapacities = async () => {
       try {
-        const response = await axios.get('https://6lc6xoke5sxjyhoqn5rvxkhffq0xepmf.lambda-url.us-east-1.on.aws/', {
+        const response = await axios.get('https://ppigrmkljgdivxgyil2tj26edi0ecevi.lambda-url.us-east-1.on.aws/', {
           params: {
             operation: 'get-room-types-capacities'
           }
@@ -70,7 +70,7 @@ const DeleteRoom = () => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://z4z3cqlddrab2eoipyozpfndfm0bnbct.lambda-url.us-east-1.on.aws/', {
+      const response = await axios.post('https://xgbyyqufvveh5qxpt7faaiwjb40pczxe.lambda-url.us-east-1.on.aws/', {
         operation: 'delete-room',
         room_data: {
           Type: formData.roomType,

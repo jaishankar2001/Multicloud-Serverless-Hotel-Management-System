@@ -30,7 +30,7 @@ const AddNewRoom = () => {
     };
 
     try {
-      const response = await axios.post('https://m6heu7xccnygolsf2vxiecp4wa0qgueh.lambda-url.us-east-1.on.aws/', {
+      const response = await axios.post('https://kkhvl4wxfv5on5cnuoelcy7fvq0qkdnb.lambda-url.us-east-1.on.aws/', {
         operation: 'add-new-room',
         room_data: roomData,
       });
