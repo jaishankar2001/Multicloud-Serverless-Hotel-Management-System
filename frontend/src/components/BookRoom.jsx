@@ -9,7 +9,7 @@ const roomCapacities = {
 };
 
 const availableRoomTypes = Object.keys(roomCapacities);
-
+const userID = localStorage.getItem('user_id')
 const BookRoom = () => {
   const location = useLocation();
   const { roomType, roomCapacity } = location.state || {};
@@ -17,7 +17,7 @@ const BookRoom = () => {
   const [formData, setFormData] = useState({
     roomType: roomType || availableRoomTypes[0],
     roomCapacity: roomCapacity || roomCapacities[roomType || availableRoomTypes[0]][0],
-    userId: '',
+    userId: userID,
     bookingDate: '',
     name: '',
     email: '',
@@ -25,16 +25,58 @@ const BookRoom = () => {
   });
 
   const [responseMessage, setResponseMessage] = useState(null);
+  const [roomTypes, setRoomTypes] = useState([]);
+  const [capacities, setCapacities] = useState([]);
+  const [roomData, setRoomData] = useState([]); // New state for fetched room data
 
   useEffect(() => {
-    if (formData.roomType) {
-      const newCapacity = roomCapacities[formData.roomType][0];
+    const fetchRoomTypesAndCapacities = async () => {
+      try {
+        const response = await axios.get('https://6lc6xoke5sxjyhoqn5rvxkhffq0xepmf.lambda-url.us-east-1.on.aws/', {
+          params: {
+            operation: 'get-room-types-capacities'
+          }
+        });
+        const data = response.data;
+        console.log(data)
+        
+        const uniqueRoomTypes = Array.from(new Set(data.map(item => item.Type)));
+        setRoomTypes(uniqueRoomTypes);
+        setRoomData(data); // Set the fetched data to state
+
+        if (uniqueRoomTypes.length > 0) {
+          const initialRoomType = uniqueRoomTypes[0];
+          const initialCapacities = data
+            .filter(item => item.Type === initialRoomType)
+            .map(item => item.Capacity);
+          setCapacities(initialCapacities);
+
+          setFormData(prevData => ({
+            ...prevData,
+            roomType: roomType || initialRoomType,
+            roomCapacity: roomCapacity || initialCapacities[0]
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching room types and capacities:', error);
+      }
+    };
+
+    fetchRoomTypesAndCapacities();
+  }, [roomType, roomCapacity]);
+
+  useEffect(() => {
+    if (formData.roomType && roomData.length > 0) {
+      const selectedCapacities = roomData
+        .filter(item => item.Type === formData.roomType)
+        .map(item => item.Capacity);
+      setCapacities(selectedCapacities);
       setFormData(prevData => ({
         ...prevData,
-        roomCapacity: newCapacity
+        roomCapacity: selectedCapacities[0]
       }));
     }
-  }, [formData.roomType]);
+  }, [formData.roomType, roomData]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -80,7 +122,7 @@ const BookRoom = () => {
               value={formData.roomType}
               onChange={handleChange}
             >
-              {availableRoomTypes.map((type) => (
+              {roomTypes.map((type) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -95,7 +137,7 @@ const BookRoom = () => {
               value={formData.roomCapacity}
               onChange={handleChange}
             >
-              {roomCapacities[formData.roomType].map((capacity) => (
+              {capacities.map((capacity) => (
                 <option key={capacity} value={capacity}>
                   {capacity}
                 </option>
