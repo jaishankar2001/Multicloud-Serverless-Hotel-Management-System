@@ -27,6 +27,7 @@ import RoomListAdmin from "./components/roomListAdmin";
 import AddNewRoom from "./components/AddNewRoom";
 import DashboardStatisticts from "./components/dashboard_statistics";
 import FeedbackList from "./pages/FeedbackList";
+import ConvoList from "./components/ConvoList";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -82,6 +83,7 @@ const App = () => {
           <Route path="DeleteRoom" element={<DeleteRoom />} />
           <Route path="AddNewRoom" element={<AddNewRoom />} />
           <Route path="Statistics" element={<DashboardStatisticts />} />
+          <Route path = "Convo-list" element = {<ConvoList/>}/>
         </Route>
         {/* Route for Chat component with dynamic conversation ID */}
         <Route path="/chat/:conversationId/:usertype" element={<Chat />} />
