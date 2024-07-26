@@ -9,7 +9,7 @@ const ChatKommunicate = () => {
         s.type = "text/javascript";
         s.async = true;
         s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        s.id = "kommunicate-script"; // Add an id to the script
+        s.id = "kommunicate-script";
         var h = document.getElementsByTagName("head")[0];
         h.appendChild(s);
         window.kommunicate = window.kommunicate || {};
