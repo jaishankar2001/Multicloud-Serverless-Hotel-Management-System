@@ -33,6 +33,7 @@ def lambda_handler(event, context):
     }
 
 
+# Get user attributes form cognito user pool based on the user_id
 def get_user_attributes(user_id):
     try:
         response = client.admin_get_user(
@@ -48,6 +49,7 @@ def get_user_attributes(user_id):
         raise Exception(f'Failed to fetch user attributes: {str(e)}')
 
 
+# Ceaser cipher event encrypt and decrypt
 def caesar_decrypt(cipher_text, shift):
     decrypted_text = []
     for char in cipher_text:

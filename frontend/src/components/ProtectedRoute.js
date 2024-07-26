@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import validateToken from './validateToken';
 
+/**
+ * Method to configure the route protection when the user is authenticated 
+ * or when the user is authorised to do so
+ */
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 

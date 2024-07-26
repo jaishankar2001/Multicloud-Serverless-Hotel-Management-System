@@ -2,10 +2,12 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Key
 
+# Function to verify the security answer that the user has input in the form
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('UserSecurityQuestion')
     
+    # Get the input event body
     body = json.loads(event['body'])
     user_id = body['userId']
     provided_answer = body['securityAnswer']

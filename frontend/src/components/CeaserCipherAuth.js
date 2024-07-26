@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/CeaserCipherAuth.css';
 import axios from 'axios';
-
+/**
+ * Method to perform the ceaser cipher authentication by generating random 4 character cipher for the user to decrypt using the Key displayed on the screen
+ * Moreover, calls the lambda function to verify the answer and also, records the login timestamp upon suceessful execution. 
+ */
 const CaesarCipherAuth = ({ userId }) => {
     const [input, setInput] = useState('');
     const [cipherText, setCipherText] = useState('');
@@ -10,6 +13,7 @@ const CaesarCipherAuth = ({ userId }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Generates random cipher text for user to perform ceaser cipher
         const generateRandomText = () => {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             let text = '';
@@ -18,7 +22,7 @@ const CaesarCipherAuth = ({ userId }) => {
             }
             return text;
         };
-
+        //  Generate random key and display to user
         const generateRandomKey = () => {
             return Math.floor(Math.random() * 5) + 1;
         };
@@ -36,22 +40,23 @@ const CaesarCipherAuth = ({ userId }) => {
             return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26) + base);
         });
     };
-
+    // Handling the submission of the function when a user completes the cipher decryption
     const handleSubmit = async (e) => {
         e.preventDefault();
+        //  Call to lambda function to verify the result and return appropriate response 
         const response = await fetch('https://wc3bu5tvwffezdaayd4l46mi4q0rokmk.lambda-url.us-east-1.on.aws/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ input, cipherText, key, userId })
         });
         const result = await response.json();
+        // If the ceaser cipher decryption is successful the record the login timestamp
         if(result.success) {
-            // const timestamp_response = await axios.post('https://us-central1-serverless-activity2.cloudfunctions.net/userLogin', {
-            //     userId
-            // });
+            //  Call to lambda function to store timestamp
             const timestamp_response = await axios.post('https://lhtv6qq4lswfsjuykromqdwsme0xatrx.lambda-url.us-east-1.on.aws/', {
                 userId
             });
+            // Navigate user based on the userRole they signed in
             if (result.userRole === 'RegisteredUser') {
                 navigate('/'); 
             } else if (result.userRole === 'PropertyAgent') {
