@@ -17,7 +17,7 @@ const AddRoom = () => {
   useEffect(() => {
     const fetchAllRooms = async () => {
       try {
-        const response = await axios.get('https://6lc6xoke5sxjyhoqn5rvxkhffq0xepmf.lambda-url.us-east-1.on.aws/');
+        const response = await axios.get('https://ppigrmkljgdivxgyil2tj26edi0ecevi.lambda-url.us-east-1.on.aws/');
         const rooms = response.data;
         setAllRooms(rooms);
 
@@ -91,7 +91,7 @@ const AddRoom = () => {
     };
     
     try {
-      const response = await axios.post('https://6qev4yi4cr2ygvqidi6wk72xvm0ennnr.lambda-url.us-east-1.on.aws/', {
+      const response = await axios.post('https://ygjq5fmopk7oyetysqv64ivzum0ayojy.lambda-url.us-east-1.on.aws/', {
         room_data: roomData
       });
       console.log('Room updated successfully:', response.data);

@@ -9,17 +9,14 @@ import Navigation from './navigation';
 const BookRoom = () => {
   const location = useLocation();
   const { roomType, roomCapacity } = location.state || {};
-  const [userID, setUserId] = useState(null);
+  const userID =  localStorage.getItem('user_id');
 
   const [formData, setFormData] = useState({
     roomType: roomType || "",
     roomCapacity: roomCapacity || "",
     userId: userID,
     bookingdate_from: '',
-    bookingdate_to: '',
-    name: '',
-    email: '',
-    date: '',
+    bookingdate_to: ''
   });
 
   const [responseMessage, setResponseMessage] = useState(null);
@@ -27,18 +24,11 @@ const BookRoom = () => {
   const [capacities, setCapacities] = useState([]);
   const [roomData, setRoomData] = useState([]);
 
-  useEffect (() => {
-    const storedUserId = localStorage.getItem('user_id');
-    setUserId(storedUserId);
-    const form = formData;
-    form['userId'] = userID;
-    setFormData(form);
-  }, [])
   useEffect(() => {
     
     const fetchRoomTypesAndCapacities = async () => {
       try {
-        const response = await axios.get('https://6lc6xoke5sxjyhoqn5rvxkhffq0xepmf.lambda-url.us-east-1.on.aws/', {
+        const response = await axios.get('https://ppigrmkljgdivxgyil2tj26edi0ecevi.lambda-url.us-east-1.on.aws/', {
           params: {
             operation: 'get-room-types-capacities'
           }
@@ -170,24 +160,6 @@ const BookRoom = () => {
                   className="form-control"
                   id="bookingdate_to"
                   value={formData.bookingdate_to}
-                  onChange={handleChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">Name:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  value={formData.email}
                   onChange={handleChange} />
               </div>
               <button type="submit" className="btn btn-custom btn-lg">
