@@ -30,7 +30,7 @@ const SignIn = ({setUserId}) => {
                 grant_type: 'authorization_code',
                 client_id: '44netf2dipspddsebq3vmq8pmn',
                 code: code,
-                redirect_uri: 'http://localhost:3000/signin' // The redirect URI
+                redirect_uri: 'http://trialbuild-qual5imuuq-uc.a.run.app/signin' // The redirect URI
               }), {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -89,7 +89,7 @@ const SignIn = ({setUserId}) => {
     }, [navigate, setUserId]);
     
     const redirectToCognitoUI = () => {
-          window.location.href = 'https://register-customers.auth.us-east-1.amazoncognito.com/signup?client_id=44netf2dipspddsebq3vmq8pmn&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin';
+      window.location.href = 'https://register-customers.auth.us-east-1.amazoncognito.com/signup?client_id=44netf2dipspddsebq3vmq8pmn&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=https%3A%2F%2Fdalvac-qual5imuuq-uc.a.run.app%2Fsignin';
     };
     return <div>Loading...</div>;
 
