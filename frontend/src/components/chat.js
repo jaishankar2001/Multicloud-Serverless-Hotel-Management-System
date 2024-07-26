@@ -26,11 +26,11 @@ const Chat = () => {
           setAgentId(data.agent_id);
 
           const sortedMessages = Object.entries(data)
-            .filter(([key, value]) => !['user_id', 'agent_id'].includes(key)) // Exclude userId and agentId fields
+            .filter(([key, value]) => !['user_id', 'agent_id'].includes(key)) 
             .sort((a, b) => Number(a[0]) - Number(b[0]))
             .map(([timestamp, messageData]) => ({
               ...messageData,
-              timestamp: new Date(Number(timestamp)).toLocaleString() // Convert timestamp to readable date format
+              timestamp: new Date(Number(timestamp)).toLocaleString() 
             }));
           setMessages(sortedMessages);
         } else {
