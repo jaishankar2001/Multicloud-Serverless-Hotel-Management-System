@@ -6,8 +6,10 @@ cognito = boto3.client('cognito-idp')
 
 TABLE_NAME = 'UserSecurityQuestion'
 
+# FUnction to store the user information upon sucessful authentication
 def lambda_handler(event, context):
     try:
+        # Get the required data from the input event
         body = json.loads(event['body'])
         security_question = body['securityQuestion']
         security_answer = body['securityAnswer']
@@ -39,6 +41,7 @@ def lambda_handler(event, context):
 
     return response
 
+# Function to get the user detals from the records based on the user_id
 def get_user_attributes(user_id):
     try:
         response = cognito.admin_get_user(
@@ -51,6 +54,7 @@ def get_user_attributes(user_id):
         print(f'Error fetching user attributes from Cognito: {str(e)}')
         raise
 
+# Function to store the details in the database for the user
 def store_security_details(user_id, security_question, security_answer, user_attributes, user_role):
     try:
         table = dynamodb.Table(TABLE_NAME)
@@ -65,7 +69,7 @@ def store_security_details(user_id, security_question, security_answer, user_att
         for attr_name, attr_value in user_attributes.items():
             item[attr_name] = attr_value
         
-        
+        # Store in the table
         table.put_item(Item=item)
         print('Security details and user attributes stored in DynamoDB')
     except Exception as e:
@@ -73,7 +77,7 @@ def store_security_details(user_id, security_question, security_answer, user_att
         raise
 
 
-
+# Function to assign role to the user based om the role captured in the cognito user pool for that user
 def assign_user_role(user_id, user_role):
     try:
         response = cognito.admin_update_user_attributes(
@@ -92,7 +96,7 @@ def assign_user_role(user_id, user_role):
         raise
     
     
-
+#  Function to add user to the respective group in the cognito user pool
 def add_user_to_group(user_id, user_role):
     try:
         group_name = 'RegisteredUsers' if user_role == 'RegisteredUser' else 'PropertyAgents'

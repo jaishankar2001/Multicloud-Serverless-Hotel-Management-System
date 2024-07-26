@@ -3,6 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Sidebar.css'
 
+/**
+ * Method to handle the admin sidebar that they will use to navigate within the side to access various features including signout
+ */
 const Sidebar = ({ handleSignOut }) => {
     return (
         <div className="sidebar">

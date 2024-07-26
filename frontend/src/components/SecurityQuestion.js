@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../css/SecurityQuestion.css";
-
+/**
+ * Method to perform the setup of security question once the user has successfully authenticated with cognito
+ * Here, they will need to setup a security question that they will need to answer during signin
+ */
 const SecurityForm = ({userId}) => {
   const [securityQuestion, setSecurityQuestion] = useState('');
   const [securityAnswer, setSecurityAnswer] = useState('');
@@ -10,23 +13,27 @@ const SecurityForm = ({userId}) => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  // Hamdling the questionchange state
   const handleQuestionChange = (e) => {
     setSecurityQuestion(e.target.value);
   };
 
+  // Hamdling the answer input state
   const handleAnswerChange = (e) => {
     setSecurityAnswer(e.target.value);
   };
 
+  // Hamdling the role selection dropdown
   const handleUserRoleChange = (e) => {
     setUserRole(e.target.value);
   };
 
+  //  Handling the submit event
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      // Example POST request using Axios
+      // POST request using Axios to the database to store details
       const response = await axios.post('https://we5eb66yfo4o7nbvf3j5bisrgm0cgcxj.lambda-url.us-east-1.on.aws/', {
         'securityQuestion' : securityQuestion,
         'securityAnswer' : securityAnswer,
@@ -41,7 +48,6 @@ const SecurityForm = ({userId}) => {
     setUserRole('');
     setMessage('Form submitted successfully!');
     navigate('/signin');
-    // navigate('/');
 
   } catch (error) {
     console.log("Error submitting the security questions: ", error);

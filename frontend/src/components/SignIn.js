@@ -5,12 +5,14 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import CryptoJS from 'crypto-js';
 
-
+/**
+ * Mehtod to handle the signin redirection as well as verifying the authentictation code that the cognito sends back upon a user's successful
+ * sign in by cognito service. We must validate it inorder to proceed further.
+ */
 const fetchUserAttributes = async (userId) => {
+    // Call to lambda function to fetch the user details that is currently signed in
     const response = await axios.get(`https://xy7ayehjn5prh7ftfyigunnflm0jjbte.lambda-url.us-east-1.on.aws/?userId=${userId}`, {
-      // headers: {
-      //   Authorization: `Bearer ${idToken}`,
-      // },
+
     });
     return response;
 };
@@ -23,8 +25,10 @@ const SignIn = ({setUserId}) => {
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
   
+        // Check if the code is returned or not
         if (code) {
           try {
+            // Check the token with the cognito
             const response = await axios.post('https://register-customers.auth.us-east-1.amazoncognito.com/oauth2/token', 
               new URLSearchParams({
                 grant_type: 'authorization_code',
