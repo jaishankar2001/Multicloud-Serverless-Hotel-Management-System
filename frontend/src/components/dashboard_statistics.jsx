@@ -13,7 +13,7 @@ const DashboardStatistics = () => {
                 title="Google Looker Studio Dashboard for Admins"
                 width="1000" 
                 height="750" 
-                src="https://lookerstudio.google.com/embed/reporting/13db439a-53fe-4d32-9333-596d152f76ec/page/s0L6D" 
+                src="https://lookerstudio.google.com/embed/reporting/c045220f-3d08-457f-ba20-7cbff431d1b6/page/Ex66D" 
                 frameBorder="0" 
                 style={{ border: '0' }} 
                 allowFullScreen 
