@@ -34,7 +34,7 @@ const SignIn = ({setUserId}) => {
                 grant_type: 'authorization_code',
                 client_id: '44netf2dipspddsebq3vmq8pmn',
                 code: code,
-                redirect_uri: 'http://trialbuild-qual5imuuq-uc.a.run.app/signin' // The redirect URI
+                redirect_uri: 'https://dalvac-qual5imuuq-uc.a.run.app/signin' // The redirect URI
               }), {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

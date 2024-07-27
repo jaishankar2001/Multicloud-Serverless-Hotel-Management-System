@@ -1,6 +1,6 @@
 import json
 import boto3
-
+#Creates a new notifcation topic
 def lambda_handler(event, context):
     sns_client = boto3.client('sns')
     dynamodb_client = boto3.client('dynamodb')

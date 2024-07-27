@@ -1,7 +1,7 @@
 import json
 import boto3
 from datetime import datetime
-
+#function to streamline sending emails
 def lambda_handler(event, context):
     sns_client = boto3.client('sns', region_name='us-east-1') 
 

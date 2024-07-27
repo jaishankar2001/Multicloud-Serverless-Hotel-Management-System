@@ -90,7 +90,13 @@ const Chat = () => {
       } else {
         setResponseMessage('Failed to end conversation.');
       }
-      navigate('/admin_dashboard/Convo-list');
+      if(usertype === "agent")
+      {
+        navigate('/admin_dashboard/Convo-list');
+      }
+      else{
+        navigate('/');
+      }
     } catch (error) {
       console.error('Error ending conversation:', error);
       setResponseMessage('Error ending conversation.');
