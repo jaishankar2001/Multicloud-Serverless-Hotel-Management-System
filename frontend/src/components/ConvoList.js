@@ -72,7 +72,7 @@ const ConvoList = () => {
         <div className="bubble-container">
           {documents.map(doc => (
             <div key={doc.id} className="bubble">
-              <a href={`http://trialbuild-qual5imuuq-uc.a.run.app/chat/${doc.id}/agent`}>{doc.id}</a>
+              <a href={`https://dalvac-qual5imuuq-uc.a.run.app/chat/${doc.id}/agent`}>{doc.id}</a>
             </div>
           ))}
         </div>

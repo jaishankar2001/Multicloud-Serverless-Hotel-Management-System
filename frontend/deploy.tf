@@ -1,16 +1,16 @@
 provider "google" {
-  project = "" #add your project name
-  region  = "" #add your region name
+  project = "dalvacationhome-427921" #add your project name
+  region  = " us-central1" #add your region name
 }
 
 resource "google_cloud_run_service" "default" {
-  name     = "" #add cloud run service name
-  location = "" #add location
+  name     = "dalvac" #add cloud run service name
+  location = "us-central1" #add location
 
   template {
     spec {
       containers {
-        image = "docker.io/kaushikdhola02/sample:latest" #replace with yours Jaishankar
+        image = "docker.io/disconnector12/dalvac:latest" #replace with yours Jaishankar
 
         ports {
           container_port = 443

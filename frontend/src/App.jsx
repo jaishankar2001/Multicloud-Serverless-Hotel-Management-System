@@ -49,7 +49,7 @@ const App = () => {
     localStorage.removeItem('user_id');
   
     setUserId(null);
-    const signOutUrl = `https://register-customers.auth.us-east-1.amazoncognito.com/signup?client_id=44netf2dipspddsebq3vmq8pmn&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=https%3A%2F%2Fdalvac-qual5imuuq-uc.a.run.app`;
+    const signOutUrl = `https://register-customers.auth.us-east-1.amazoncognito.com/logout?client_id=44netf2dipspddsebq3vmq8pmn&logout_uri=https%3A%2F%2Fdalvac-qual5imuuq-uc.a.run.app`;
     window.location.assign(signOutUrl);
   };
 

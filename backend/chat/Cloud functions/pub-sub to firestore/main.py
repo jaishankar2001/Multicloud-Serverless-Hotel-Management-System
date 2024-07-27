@@ -21,7 +21,6 @@ def firestore_update_or_create(event, context):
             message = base64.b64decode(event['data']).decode('utf-8')
             data = json.loads(message)
             
-            # Assuming the data contains a field 'id' and the content to store
             doc_id = data.get('booking_id')
             user_id = data.get('user_id')
             agent_id = data.get('agent_id')

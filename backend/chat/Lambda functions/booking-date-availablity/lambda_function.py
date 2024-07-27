@@ -10,6 +10,7 @@ sqs = boto3.client('sqs')
 
 sqs_queue_url = 'https://sqs.us-east-1.amazonaws.com/683277040625/booking-confirmation'
 
+#function to return a list of dates in between the start and end date
 def get_dates_between(from_date, to_date):
     start_date = datetime.strptime(from_date, '%Y-%m-%d')
     end_date = datetime.strptime(to_date, '%Y-%m-%d')

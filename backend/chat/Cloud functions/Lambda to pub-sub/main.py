@@ -3,7 +3,7 @@ import json
 
 # Initialize Pub/Sub client
 publisher = pubsub_v1.PublisherClient()
-topic_name = 'projects/dalvacationhome-427921/topics/querypub'  # Replace with your project and topic name
+topic_name = 'projects/dalvacationhome-427921/topics/querypub'
 
 def publish_to_pubsub(request):
     """

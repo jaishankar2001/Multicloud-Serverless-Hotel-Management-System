@@ -36,12 +36,12 @@ export const Navigation = ({ handleSignOut }) => {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="#features" className="page-scroll">
+              <a href="/#features" className="page-scroll">
                 Features
               </a>
             </li>
             <li>
-              <a href="#booking" className="page-scroll">
+              <a href="/#booking" className="page-scroll">
                 Booking
               </a>
             </li>
@@ -56,7 +56,7 @@ export const Navigation = ({ handleSignOut }) => {
               </a>
             </li> */}
             <li>
-              <a href="#testimonials" className="page-scroll">
+              <a href="/#testimonials" className="page-scroll">
                 Testimonials
               </a>
             </li>
@@ -71,7 +71,7 @@ export const Navigation = ({ handleSignOut }) => {
               </Link>
             </li>
             <li>
-              <a href="#contact" className="page-scroll">
+              <a href="/#contact" className="page-scroll">
                 Contact
               </a>
             </li>
