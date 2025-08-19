@@ -1,93 +1,123 @@
-# Serverless_Group1
+# DalVacationHome – Serverless Data Processing
 
+A cloud-based serverless web application designed for room bookings, user authentication, live chat with agents, notifications, and feedback analysis. The project leverages AWS and GCP services to deliver a scalable, secure, and fully automated experience.
 
+![Homepage](./assets/Homepage.jpg)
 
-## Getting started
+## 📑 Features
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### 🗨️ Virtual Assistant (DalBot)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- Built with **Amazon Lex** and **AWS Lambda**.
+- Helps users with booking details, FAQs, and navigation.
+- Integrated with **DynamoDB** for retrieving booking details.
+- React-based custom chatbot UI.
 
-## Add your files
+### 🛠️ Admin Dashboard
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- Built with **React + AWS Lambda + DynamoDB**.
+- Features include:
+  - Add new room types.
+  - Update existing room details.
+  - Delete rooms.
+- Ensures only authenticated admin users can modify data.
 
-```
-cd existing_repo
-git remote add origin https://git.cs.dal.ca/mohanraj/serverless_group1.git
-git branch -M main
-git push -uf origin main
-```
+### 🔐 User Authentication
 
-## Integrate with your tools
+- **Multi-layer authentication** system:
+  1. **AWS Cognito** for sign-up/sign-in and user pool management.
+  2. **Security question & answer verification**.
+  3. **Caesar cipher decryption challenge** for enhanced security.
+- Role-based access control for admins and users.
 
-- [ ] [Set up project integrations](https://git.cs.dal.ca/mohanraj/serverless_group1/-/settings/integrations)
+### 🏨 Booking System
 
-## Collaborate with your team
+- Serverless backend with **AWS Lambda + DynamoDB + API Gateway**.
+- Users can:
+  - View available rooms.
+  - Create bookings.
+  - Receive booking confirmation/rejection emails.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### 📬 Notifications
 
-## Test and Deploy
+- **AWS SNS** used for event-driven notifications:
+  - Account creation confirmations.
+  - Login alerts with timestamp.
+  - Booking confirmations or failures.
+  - Chat invitations for live agent support.
 
-Use the built-in continuous integration in GitLab.
+### 💬 Live Chat (Multi-cloud Integration)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+- **AWS Lambda + GCP Pub/Sub + Firestore + Firebase Messaging**.
+- Real-time chat between users and agents.
+- Ensures message ordering and persistence.
 
-***
+### 📊 Data Analysis & Visualization
 
-# Editing this README
+- Feedback system with sentiment analysis using **Google Cloud Natural Language API**.
+- Users:
+  - Submit, view, and delete feedback.
+  - See sentiment polarity of existing feedback.
+- Admin Dashboard with login statistics powered by **Looker Studio**.
+- Data updated using **AWS Lambda + EventBridge + GCP Cloud Storage**.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
 
-## Suggestions for a good README
+## 🏗️ Architecture
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+![System Architecture](./assets/system_archi.png)
 
-## Name
-Choose a self-explaining name for your project.
+### Explanation
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Provide detailed explanations for each part of the architecture here. Suggested breakdown:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+1. **Frontend**
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+   - Built with React
+   - Communicates with backend via API Gateway.
+   - Hosted in a serverless configuration using Google Cloud Run.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+2. **User Authentication**
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+   - AWS Cognito + custom layers (security Q&A and Caesar cipher).
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+3. **Booking System**
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+   - AWS Lambda functions interacting with DynamoDB via API Gateway.
+   - Code Written in Python.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+4. **Virtual Assistant (DalBot)**
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+   - Amazon Lex + Lambda fetching booking data from DynamoDB.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+5. **Notifications**
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+   - AWS SNS triggers email notifications based on user actions.
+   - Uses Lambdas to make SNS calls for code reusablitly.
 
-## License
-For open source projects, say how it is licensed.
+6. **Live Chat**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+   - Multi-cloud integration between AWS and GCP using Pub/Sub, Firestore, and Firebase Messaging.
+
+7. **Data Analysis & Visualization**
+   - Feedback stored in DynamoDB.
+   - Sentiment analysis via Google Natural Language API.
+   - Admin dashboards rendered using Looker Studio, updated with EventBridge + Cloud Functions.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Frontend:** React, JavaScript, HTML, CSS
+- **AWS Services:**
+  - Lambda, DynamoDB, Cognito, Lex, API Gateway, SNS, EventBridge
+- **GCP Services:**
+  - Pub/Sub, Firestore, Cloud Storage, Cloud Functions, Looker Studio, Natural Language API
+- **Other Tools:**
+  - Docker (for containerization)
+  - Terraform (for IaC)
+  - Kommunicate (for chatbot UI integration)
+
+---
+
+For more information regarding each component, cloud architecture and individual contributions refer to the project report.
